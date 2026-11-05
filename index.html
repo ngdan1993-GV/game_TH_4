@@ -3,711 +3,1313 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nhà Thám Hiểm Tính Từ - Ngọc Dân Digital Classroom</title>
-  <style>
-    :root {
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-      --bg-color: #f0f7ff;
-      --card-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --group1-color: #7e22ce;
-      --group1-bg: #faf5ff;
-      --group1-border: #d8b4fe;
-      --group2-color: #0369a1;
-      --group2-bg: #f0f9ff;
-      --group2-border: #bae6fd;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      padding: 16px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    /* Tiêu đề & Linh vật */
-    .header-box {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .mascot {
-      font-size: 56px;
-      display: inline-block;
-      animation: float 2.5s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .title {
-      font-size: 24px;
-      font-weight: 900;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-top: 6px;
-    }
-
-    .subtitle {
-      font-size: 13px;
-      font-weight: 700;
-      color: #f59e0b;
-      letter-spacing: 1px;
-    }
-
-    /* Khối thẻ giao diện */
-    .card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      border: 1px solid #e2e8f0;
-      margin-bottom: 16px;
-    }
-
-    /* Màn hình Đăng nhập */
-    .form-group {
-      margin-bottom: 14px;
-      text-align: left;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #334155;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 12px 16px;
-      border-radius: 12px;
-      border: 2px solid #cbd5e1;
-      font-size: 15px;
-      font-weight: 600;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .form-control:focus {
-      border-color: var(--primary);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 14px;
-      border-radius: 16px;
-      border: none;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-transform: uppercase;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #2563eb, #3b82f6);
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(135deg, #1d4ed8, #2563eb);
-      transform: translateY(-1px);
-    }
-
-    .btn-success {
-      background: linear-gradient(135deg, #059669, #10b981);
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
-    }
-
-    .btn-success:hover {
-      background: linear-gradient(135deg, #047857, #059669);
-      transform: translateY(-1px);
-    }
-
-    /* Màn hình chơi game */
-    .mission-badge {
-      background: #fef3c7;
-      border: 2px solid #fde68a;
-      border-radius: 16px;
-      padding: 14px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .mission-text {
-      font-size: 14px;
-      color: #92400e;
-      line-height: 1.5;
-    }
-
-    .student-tag {
-      background: #ffffff;
-      padding: 6px 14px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 13px;
-      color: #1e293b;
-      border: 1px solid #fde68a;
-    }
-
-    /* Bài văn đọc & chạm từ */
-    .story-title {
-      font-size: 17px;
-      font-weight: 800;
-      color: #1d4ed8;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .story-content {
-      line-height: 2;
-      font-size: 17px;
-      background: #f8fafc;
-      padding: 18px;
-      border-radius: 16px;
-      border: 1px solid #e2e8f0;
-      user-select: none;
-    }
-
-    .word-token {
-      display: inline-block;
-      padding: 2px 6px;
-      margin: 2px;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #ffffff;
-      border: 1.5px solid #cbd5e1;
-      font-weight: 500;
-      transition: all 0.15s ease;
-    }
-
-    .word-token:hover {
-      border-color: #3b82f6;
-      background-color: #eff6ff;
-      transform: translateY(-2px);
-    }
-
-    .word-token.selected {
-      background: #fde047;
-      border-color: #ea580c;
-      color: #78350f;
-      font-weight: 800;
-      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.25);
-      transform: scale(1.05);
-    }
-
-    /* Khu vực phân loại */
-    .dock-title {
-      font-size: 15px;
-      font-weight: 800;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .card-pool {
-      min-height: 80px;
-      background: #f8fafc;
-      border: 2px dashed #cbd5e1;
-      border-radius: 16px;
-      padding: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .empty-hint {
-      color: #94a3b8;
-      font-size: 13px;
-      font-style: italic;
-      margin: auto;
-    }
-
-    .classification-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 16px;
-      margin-bottom: 20px;
-    }
-
-    @media (max-width: 640px) {
-      .classification-grid {
-        grid-template-columns: 1fr;
+  <title>Nhà Thám Hiểm Tính Từ – Ngọc Dân Digital Classroom</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pastelYellow: '#FFF9DB',
+            pastelBlue: '#E7F5FF',
+            pastelMint: '#E6FCF5',
+            pastelPink: '#FFF0F6',
+            pastelPeach: '#FFE8CC',
+            brandBlue: '#339AF0',
+            brandPink: '#FF6B6B',
+            brandGreen: '#20C997',
+            brandOrange: '#FD7E14'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
       }
     }
-
-    .group-box {
-      border-radius: 18px;
-      padding: 16px;
-      border: 2px solid;
+  </script>
+  <style>
+    /* Hoạt ảnh linh vật nhảy múa */
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
     }
-
-    .group-box.g1 {
-      background: var(--group1-bg);
-      border-color: var(--group1-border);
+    .animate-floaty {
+      animation: floaty 3s ease-in-out infinite;
     }
-
-    .group-box.g2 {
-      background: var(--group2-bg);
-      border-color: var(--group2-border);
-    }
-
-    .group-header {
-      font-size: 14px;
-      font-weight: 900;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .g1 .group-header { color: var(--group1-color); }
-    .g2 .group-header { color: var(--group2-color); }
-
-    .group-target {
-      min-height: 130px;
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 12px;
-      padding: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-content: flex-start;
-      border: 1px dashed rgba(0,0,0,0.1);
-    }
-
-    /* Thẻ từ hiển thị (Chip) */
-    .word-chip {
-      background: #ffffff;
-      border: 2px solid #facc15;
-      padding: 6px 10px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 13px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-    }
-
-    .chip-btn {
-      border: none;
+    
+    /* Token từ ngữ trong bài văn */
+    .word-token {
+      display: inline-block;
+      padding: 1px 4px;
+      margin: 1px 1px;
       border-radius: 6px;
-      padding: 2px 6px;
-      font-size: 11px;
-      font-weight: 800;
       cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+    }
+    .word-token:hover {
+      background-color: #E2E8F0;
+      transform: translateY(-1px);
+    }
+    .word-token.selected {
+      background-color: #FFE066;
+      font-weight: 700;
+      color: #795548;
+      box-shadow: 0 2px 6px rgba(253, 126, 20, 0.25);
+      border-bottom: 2px solid #FD7E14;
+      transform: scale(1.05);
+    }
+    .word-token:hover {
+      background-color: #E2E8F0;
+      transform: translateY(-2px);
+    }
+    .word-token.selected {
+      background-color: #FFE066;
+      font-weight: 700;
+      color: #795548;
+      box-shadow: 0 2px 6px rgba(253, 126, 20, 0.25);
+      border-bottom: 3px solid #FD7E14;
+      transform: scale(1.06);
     }
 
-    .btn-to-g1 { background: #f3e8ff; color: #7e22ce; }
-    .btn-to-g2 { background: #e0f2fe; color: #0284c7; }
-    .btn-swap { background: #fef08a; color: #854d0e; }
-    .btn-back { background: #f1f5f9; color: #475569; }
-    .btn-del {
-      background: #fee2e2;
-      color: #b91c1c;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      font-size: 13px;
+    /* Thẻ từ kéo thả */
+    .word-card {
+      user-select: none;
+      touch-action: none;
+      cursor: grab;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .word-card:active {
+      cursor: grabbing;
+      transform: scale(0.96);
     }
 
-    .hidden {
-      display: none !important;
+    /* Vùng hứng thả thẻ */
+    .drop-zone {
+      transition: border-color 0.2s, background-color 0.2s;
     }
-
-    /* Màn hình chúc mừng */
-    .success-box {
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .success-icon {
-      font-size: 72px;
-      margin-bottom: 12px;
+    .drop-zone.drag-active {
+      background-color: #F1F3F5 !important;
+      border-color: #339AF0 !important;
+      transform: scale(1.01);
     }
   </style>
 </head>
-<body>
+<body class="bg-[#F8FAFC] text-slate-800 min-h-screen flex flex-col font-sans selection:bg-amber-200">
 
-  <div class="container">
-    
-    <!-- Header -->
-    <div class="header-box">
-      <div class="mascot">🦁🧭</div>
-      <h1 class="title">Nhà Thám Hiểm Tính Từ</h1>
-      <div class="subtitle">NGỌC DÂN DIGITAL CLASSROOM</div>
+  <!-- ======================== THANH ĐIỀU HƯỚNG CHÍNH ======================== -->
+  <header class="bg-white/95 backdrop-blur shadow-sm border-b-4 border-pastelBlue sticky top-0 z-40 px-4 py-3 sm:px-6">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="App.goHome()">
+        <span class="text-3xl animate-floaty inline-block">🦁</span>
+        <div>
+          <h1 class="text-lg sm:text-xl font-extrabold text-blue-600 tracking-wide uppercase">
+            Nhà Thám Hiểm Tính Từ
+          </h1>
+          <p class="text-xs text-slate-500 font-semibold tracking-wider">NGỌC DÂN DIGITAL CLASSROOM</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- Nút âm thanh -->
+        <button id="soundToggleBtn" onclick="App.toggleSound()" class="px-3.5 py-1.5 rounded-full font-bold text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200 transition shadow-sm flex items-center gap-1.5">
+          <span>🔊</span> <span id="soundStatusText">Bật</span>
+        </button>
+
+        <!-- Chuyển đổi giao diện Giáo viên / Học sinh -->
+        <div id="navAuthGroup">
+          <button onclick="App.openTeacherModal()" class="px-4 py-1.5 rounded-full font-bold text-xs sm:text-sm bg-amber-100 text-amber-800 hover:bg-amber-200 transition border border-amber-300 shadow-sm flex items-center gap-1.5">
+            <span>🔐</span> Chế Độ Giáo Viên
+          </button>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <!-- 1. MÀN HÌNH BẮT ĐẦU -->
-    <div id="viewStart" class="card" style="max-width: 480px; margin: 0 auto;">
-      <h3 style="text-align: center; margin-bottom: 16px; font-weight: 800; font-size: 18px;">THAM GIA THỬ THÁCH</h3>
-      
-      <div class="form-group">
-        <label>Họ và tên của em:</label>
-        <input type="text" id="studentName" class="form-control" placeholder="Ví dụ: Nguyễn Văn An">
+  <!-- ======================== VÙNG NỘI DUNG CHÍNH ======================== -->
+  <main class="flex-grow max-w-6xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-center">
+
+    <!-- 1. MÀN HÌNH CHÀO MỪNG / ĐĂNG NHẬP THAM GIA HỌC SINH -->
+    <section id="viewHome" class="w-full max-w-xl mx-auto text-center py-6 px-4">
+      <div class="inline-block p-4 rounded-3xl bg-amber-50 border-4 border-amber-200 shadow-xl mb-6">
+        <span class="text-7xl sm:text-8xl block animate-floaty">🦁🧭</span>
       </div>
 
-      <div class="form-group">
-        <label>Lớp của em:</label>
-        <select id="studentClass" class="form-control">
-          <option value="Lớp 4A">Lớp 4A</option>
-          <option value="Lớp 4B">Lớp 4B</option>
-          <option value="Lớp 4C">Lớp 4C</option>
-          <option value="Lớp 4D">Lớp 4D</option>
-          <option value="Lớp 5A">Lớp 5A</option>
-          <option value="Lớp Khác">Lớp Khác</option>
-        </select>
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-800 mb-3">
+        CHÀO MỪNG NHÀ THÁM HIỂM NHÍ!
+      </h2>
+      <p class="text-slate-600 text-sm sm:text-base mb-6 leading-relaxed">
+        Em hãy cùng dạo bước trong đêm trăng Viên, đọc thật kỹ câu chuyện và truy tìm các <strong>tính từ</strong> thật thú vị nhé!
+      </p>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 text-left space-y-4">
+        <div>
+          <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-1">Mã tham gia game:</label>
+          <input type="text" id="joinGameCode" value="TINHTU2026" class="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:outline-none font-bold uppercase tracking-wider text-slate-700 bg-slate-50">
+        </div>
+
+        <div>
+          <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-1">Họ và tên của em:</label>
+          <input type="text" id="studentName" placeholder="Ví dụ: Nguyễn Văn An" class="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:outline-none font-medium text-slate-800">
+        </div>
+
+        <div>
+          <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-1">Lớp của em:</label>
+          <select id="studentClass" class="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:outline-none font-medium text-slate-700 bg-white">
+            <option value="Lớp 4A">Lớp 4A</option>
+            <option value="Lớp 4B">Lớp 4B</option>
+            <option value="Lớp 5A">Lớp 5A</option>
+            <option value="Lớp 5B">Lớp 5B</option>
+            <option value="Lớp Khác">Lớp Khác</option>
+          </select>
+        </div>
+
+        <button onclick="App.startStudentGame()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-black text-lg shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 active:scale-[0.98] transition flex items-center justify-center gap-2 mt-4">
+          <span>🚀</span> BẮT ĐẦU KHÁM PHÁ
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. MÀN HÌNH CHƠI GAME CỦA HỌC SINH -->
+    <section id="viewStudentGame" class="hidden space-y-6">
+      <!-- Thẻ thông báo nhiệm vụ -->
+      <div class="bg-gradient-to-r from-pastelYellow via-amber-50 to-orange-50 border-2 border-amber-200 rounded-3xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <span class="text-4xl">📜</span>
+          <div>
+            <h3 class="text-base sm:text-lg font-black text-amber-900 uppercase">Nhiệm vụ của em:</h3>
+            <p id="studentInstruction" class="text-xs sm:text-sm text-amber-800 font-medium">
+              1. Chạm vào các tính từ trong bài văn để tạo thẻ từ.<br>
+              2. Kéo thả thẻ từ vào đúng hai nhóm phân loại ở bên dưới.<br>
+              3. Nhấn nút "HOÀN THÀNH - NỘP BÀI" khi làm xong.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white/90 backdrop-blur rounded-2xl px-4 py-2 border border-amber-200 self-stretch md:self-auto flex items-center justify-between md:flex-col text-right">
+          <span class="text-xs text-slate-500 font-semibold">Học sinh:</span>
+          <span id="displayStudentBadge" class="font-bold text-slate-800 text-sm sm:text-base">---</span>
+        </div>
       </div>
 
-      <button id="btnStartGame" class="btn btn-primary" style="margin-top: 10px;">
-        BẮT ĐẦU KHÁM PHÁ 🚀
-      </button>
+      <!-- Khung bài văn đọc -->
+      <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-100">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+          <h3 id="displayStoryTitle" class="text-lg sm:text-xl font-extrabold text-blue-700 flex items-center gap-2">
+            <span>📖</span> BÉT-TÔ-VEN VÀ BẢN XÔ-NÁT ÁNH TRĂNG
+          </h3>
+          <span class="text-xs font-bold text-slate-400 bg-slate-100 px-3 py-1 rounded-full">
+            💡 Chạm từ đơn hoặc bôi chọn cụm từ để tạo thẻ
+          </span>
+        </div>
+
+        <div id="storyContainer" class="text-base sm:text-lg leading-relaxed text-slate-700 bg-amber-50/40 p-4 sm:p-6 rounded-2xl border border-amber-100/80 font-normal">
+          <!-- Các token từ ngữ sẽ được inject vào đây -->
+        </div>
+      </div>
+
+      <!-- Dock thẻ từ đã chọn -->
+      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-100">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="font-extrabold text-slate-700 text-sm sm:text-base flex items-center gap-2">
+            <span>🏷️</span> KHU VỰC THẺ TỪ ĐÃ CHỌN:
+            <span id="selectedCountBadge" class="bg-blue-100 text-blue-700 text-xs px-2.5 py-0.5 rounded-full font-bold">0 thẻ</span>
+          </h4>
+          <span class="text-xs text-slate-400 font-medium hidden sm:inline">Kéo các thẻ bên dưới vào 2 nhóm tương ứng</span>
+        </div>
+
+        <!-- Khay chứa thẻ chờ phân loại -->
+        <div id="dockPool" class="min-h-[85px] bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl p-3 flex flex-wrap gap-2.5 items-center drop-zone" data-zone="pool">
+          <p id="emptyPoolHint" class="text-slate-400 text-xs sm:text-sm font-medium mx-auto">
+            (Chưa có thẻ từ nào. Em hãy chạm vào các tính từ ở bài văn phía trên nhé!)
+          </p>
+        </div>
+      </div>
+
+      <!-- Hai khu vực phân loại -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Nhóm 1: Tiếng nhạc -->
+        <div class="bg-gradient-to-b from-purple-50/70 to-white rounded-3xl p-5 border-2 border-purple-200 shadow-sm flex flex-col">
+          <div class="flex items-center gap-2 mb-3 pb-2 border-b border-purple-100">
+            <span class="text-2xl">🎵</span>
+            <h4 id="displayGroup1Title" class="font-black text-purple-900 text-sm sm:text-base uppercase tracking-wide">
+              KHU VỰC 1: TÍNH TỪ CHỈ ĐẶC ĐIỂM CỦA TIẾNG NHẠC
+            </h4>
+          </div>
+          <div id="zoneGroup1" class="drop-zone flex-grow min-h-[160px] bg-purple-50/30 rounded-2xl p-3 border-2 border-dashed border-purple-200 flex flex-wrap content-start gap-2.5" data-zone="group1">
+            <!-- Thẻ từ nhóm 1 -->
+          </div>
+        </div>
+
+        <!-- Nhóm 2: Dòng sông -->
+        <div class="bg-gradient-to-b from-blue-50/70 to-white rounded-3xl p-5 border-2 border-blue-200 shadow-sm flex flex-col">
+          <div class="flex items-center gap-2 mb-3 pb-2 border-b border-blue-100">
+            <span class="text-2xl">🌊</span>
+            <h4 id="displayGroup2Title" class="font-black text-blue-900 text-sm sm:text-base uppercase tracking-wide">
+              KHU VỰC 2: TÍNH TỪ CHỈ ĐẶC ĐIỂM CỦA DÒNG SÔNG
+            </h4>
+          </div>
+          <div id="zoneGroup2" class="drop-zone flex-grow min-h-[160px] bg-blue-50/30 rounded-2xl p-3 border-2 border-dashed border-blue-200 flex flex-wrap content-start gap-2.5" data-zone="group2">
+            <!-- Thẻ từ nhóm 2 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Nút hoàn thành - Nộp bài -->
+      <div class="text-center pt-4 pb-8">
+        <button onclick="App.confirmSubmitModal()" class="px-8 sm:px-12 py-4 sm:py-5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-lg sm:text-xl shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition flex items-center justify-center gap-3 mx-auto">
+          <span>✨</span> HOÀN THÀNH – NỘP BÀI
+        </button>
+      </div>
+    </section>
+
+    <!-- 3. MÀN HÌNH QUẢN TRỊ CỦA GIÁO VIÊN -->
+    <section id="viewTeacherDashboard" class="hidden space-y-6">
+      <!-- Thanh công cụ giáo viên -->
+      <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-5 rounded-3xl border border-slate-100 shadow-sm">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-2">
+            <span>📊</span> BẢNG ĐIỀU KHIỂN GIÁO VIÊN
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 font-medium">Hệ thống quản lý bài nộp & biên soạn bài học nội bộ</p>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <button onclick="App.openEditStoryModal()" class="px-4 py-2 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs sm:text-sm transition flex items-center gap-1.5 shadow-sm">
+            <span>✏️</span> Chỉnh Sửa Bài Học
+          </button>
+          <button onclick="App.exportDataBackup()" class="px-4 py-2 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm transition flex items-center gap-1.5 shadow-sm">
+            <span>💾</span> Sao Lưu Dữ Liệu (JSON)
+          </button>
+          <button onclick="App.logoutTeacher()" class="px-3.5 py-2 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm transition">
+            Đăng Xuất
+          </button>
+        </div>
+      </div>
+
+      <!-- Thống kê tổng quan -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-white p-5 rounded-3xl border border-blue-100 shadow-sm text-center">
+          <span class="text-xs font-extrabold text-blue-500 uppercase tracking-wider">Tổng học sinh nộp</span>
+          <div id="statTotalSubmissions" class="text-3xl sm:text-4xl font-black text-blue-600 mt-1">0</div>
+        </div>
+        <div class="bg-white p-5 rounded-3xl border border-emerald-100 shadow-sm text-center">
+          <span class="text-xs font-extrabold text-emerald-500 uppercase tracking-wider">Bài đã xem xét</span>
+          <div id="statReviewedSubmissions" class="text-3xl sm:text-4xl font-black text-emerald-600 mt-1">0</div>
+        </div>
+        <div class="bg-white p-5 rounded-3xl border border-rose-100 shadow-sm text-center">
+          <span class="text-xs font-extrabold text-rose-500 uppercase tracking-wider">Cần kiểm tra</span>
+          <div id="statPendingSubmissions" class="text-3xl sm:text-4xl font-black text-rose-600 mt-1">0</div>
+        </div>
+      </div>
+
+      <!-- Bảng danh sách bài nộp -->
+      <div class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
+        <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+          <h3 class="font-black text-slate-800 text-base sm:text-lg flex items-center gap-2">
+            <span>📋</span> Danh Sách Bài Nộp Mới Nhất
+          </h3>
+          <span id="badgeActiveGameCode" class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-bold">
+            Mã Game: TINHTU2026
+          </span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 text-slate-500 text-xs font-extrabold uppercase border-b border-slate-100">
+                <th class="p-4">STT</th>
+                <th class="p-4">Học Sinh</th>
+                <th class="p-4">Lớp</th>
+                <th class="p-4">Thời Gian Nộp</th>
+                <th class="p-4">Thẻ Đã Tìm</th>
+                <th class="p-4">Trạng Thái</th>
+                <th class="p-4 text-center">Thao Tác</th>
+              </tr>
+            </thead>
+            <tbody id="submissionTableBody" class="divide-y divide-slate-100 text-sm">
+              <!-- Dữ liệu bài nộp động -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================== CÁC CỬA SỔ MODAL ======================== -->
+
+  <!-- Modal Đăng nhập Giáo viên -->
+  <div id="modalTeacherAuth" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl border border-slate-100">
+      <div class="text-center mb-5">
+        <span class="text-5xl block mb-2">🔐</span>
+        <h3 class="text-xl font-black text-slate-800">GIÁO VIÊN ĐĂNG NHẬP</h3>
+        <p class="text-xs text-slate-500 font-medium">Khu vực dành riêng cho thầy cô quản lý</p>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Tài khoản:</label>
+          <input type="text" id="teacherUserInput" value="giaovien" class="w-full px-4 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:outline-none text-sm font-semibold text-slate-800">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Mật khẩu:</label>
+          <input type="password" id="teacherPassInput" value="ThayGiao2026@" class="w-full px-4 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:outline-none text-sm font-semibold text-slate-800">
+        </div>
+
+        <div class="flex gap-2 pt-2">
+          <button onclick="App.loginTeacher()" class="flex-1 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition">
+            Đăng Nhập
+          </button>
+          <button onclick="App.closeTeacherModal()" class="px-4 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-sm transition">
+            Hủy
+          </button>
+        </div>
+      </div>
     </div>
-
-    <!-- 2. MÀN HÌNH CHƠI BÀI TẬP -->
-    <div id="viewGame" class="hidden">
-      <!-- Bảng nhiệm vụ -->
-      <div class="mission-badge">
-        <div class="mission-text">
-          <strong>📜 Nhiệm vụ:</strong> Em hãy chạm vào các <em>tính từ</em> trong đoạn văn. Sau đó ấn nút để đưa thẻ vào đúng 2 nhóm bên dưới nhé!
-        </div>
-        <div id="displayBadge" class="student-tag">Học sinh: ---</div>
-      </div>
-
-      <!-- Bài đọc -->
-      <div class="card">
-        <div class="story-title">📖 BÉT-TÔ-VEN VÀ BẢN XÔ-NÁT ÁNH TRĂNG</div>
-        <div id="storyContainer" class="story-content"></div>
-      </div>
-
-      <!-- Khay thẻ từ đã tìm được -->
-      <div class="card">
-        <div class="dock-title">
-          <span>🏷️ THẺ TỪ VỪA CHỌN:</span>
-          <span id="badgeCount" style="font-size: 12px; background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 12px;">0 thẻ</span>
-        </div>
-        <div id="dockPool" class="card-pool">
-          <div id="emptyHint" class="empty-hint">(Chưa có từ nào. Em hãy chạm vào các từ miêu tả trong bài văn phía trên nhé!)</div>
-        </div>
-      </div>
-
-      <!-- 2 Khu vực phân loại -->
-      <div class="classification-grid">
-        <div class="group-box g1">
-          <div class="group-header">🎵 ĐẶC ĐIỂM TIẾNG NHẠC</div>
-          <div id="zoneG1" class="group-target"></div>
-        </div>
-        <div class="group-box g2">
-          <div class="group-header">🌊 ĐẶC ĐIỂM DÒNG SÔNG</div>
-          <div id="zoneG2" class="group-target"></div>
-        </div>
-      </div>
-
-      <!-- Nút nộp bài -->
-      <button id="btnSubmitGame" class="btn btn-success" style="max-width: 320px; margin: 0 auto; display: block;">
-        HOÀN THÀNH – NỘP BÀI ✨
-      </button>
-    </div>
-
-    <!-- 3. MÀN HÌNH HOÀN THÀNH -->
-    <div id="viewSuccess" class="card hidden success-box">
-      <div class="success-icon">🏆🎉</div>
-      <h2 style="color: #059669; font-size: 22px; font-weight: 900; margin-bottom: 8px;">XUẤT SẮC LẮM!</h2>
-      <p style="color: #64748b; font-size: 15px; margin-bottom: 24px;">Bài làm của em đã hoàn thành và được lưu lại trên thiết bị thành công.</p>
-      <button id="btnPlayAgain" class="btn btn-primary" style="max-width: 260px; margin: 0 auto;">
-        LÀM LẠI BÀI MỚI 🔄
-      </button>
-    </div>
-
   </div>
 
+  <!-- Modal Xác nhận nộp bài -->
+  <div id="modalConfirmSubmit" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl p-6 sm:p-7 max-w-md w-full shadow-2xl border border-slate-100 text-center">
+      <span class="text-5xl block mb-3 animate-bounce">📬</span>
+      <h3 class="text-xl font-black text-slate-800 mb-2">XÁC NHẬN NỘP BÀI</h3>
+      <p id="confirmSubmitSummary" class="text-sm text-slate-600 mb-6 leading-relaxed">
+        Em đã tìm được <strong class="text-blue-600">0 thẻ từ</strong>.<br>
+        Em có muốn kiểm tra lại trước khi gửi lên máy chủ lớp học không?
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-2.5">
+        <button id="btnPerformSubmit" onclick="App.performSubmitWork()" class="flex-1 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-sm sm:text-base shadow-lg transition">
+          🚀 GỬI BÀI NGAY
+        </button>
+        <button onclick="App.closeConfirmModal()" class="px-5 py-3.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition">
+          Em Muốn Sửa Tiếp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay Hoàn thành nhiệm vụ chúc mừng học sinh -->
+  <div id="modalSuccessCelebration" class="fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl text-center space-y-4 border-4 border-amber-300">
+      <div class="text-7xl block animate-bounce">🏆🎉</div>
+      <h3 class="text-2xl font-black text-amber-600">XUẤT SẮC LẮM NHÀ THÁM HIỂM!</h3>
+      <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+        Bài làm của em đã được gửi thành công lên máy chủ lớp học. Thầy/Cô sẽ xem xét và nhận xét bài của em nhé!
+      </p>
+
+      <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200 text-left text-xs sm:text-sm space-y-1 text-slate-700">
+        <div><strong>Họ tên:</strong> <span id="doneStudentName">---</span></div>
+        <div><strong>Số thẻ từ phân loại:</strong> <span id="doneCardCount">0 thẻ</span></div>
+        <div><strong>Thời gian gửi:</strong> <span id="doneSubmitTime">---</span></div>
+      </div>
+
+      <button onclick="App.goHome()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-black text-base shadow-lg hover:shadow-xl transition">
+        🌟 QUAY VỀ TRANG CHỦ
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Soạn thảo / Chỉnh sửa bài học (Dành cho giáo viên) -->
+  <div id="modalEditStory" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 class="text-xl font-black text-slate-800 flex items-center gap-2">
+          <span>✏️</span> CHỈNH SỬA BÀI HỌC VÀ ĐÁP ÁN
+        </h3>
+        <button onclick="App.closeEditStoryModal()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Mã Game:</label>
+          <input type="text" id="editGameCodeInput" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-bold uppercase">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Tiêu đề bài văn:</label>
+          <input type="text" id="editReadingTitleInput" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-bold">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">Nội dung bài văn đọc:</label>
+        <textarea id="editReadingContentInput" rows="7" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-normal leading-relaxed"></textarea>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-purple-50/60 p-4 rounded-2xl border border-purple-200">
+          <label class="block text-xs font-bold text-purple-900 mb-1">Tên Khu vực 1:</label>
+          <input type="text" id="editGroup1NameInput" class="w-full px-3 py-2 rounded-xl border border-purple-200 text-xs sm:text-sm font-bold mb-2">
+          <label class="block text-xs font-bold text-purple-900 mb-1">Đáp án gợi ý nhóm 1 (cách nhau dấu phẩy):</label>
+          <input type="text" id="editGroup1AnswersInput" class="w-full px-3 py-2 rounded-xl border border-purple-200 text-xs">
+        </div>
+
+        <div class="bg-blue-50/60 p-4 rounded-2xl border border-blue-200">
+          <label class="block text-xs font-bold text-blue-900 mb-1">Tên Khu vực 2:</label>
+          <input type="text" id="editGroup2NameInput" class="w-full px-3 py-2 rounded-xl border border-blue-200 text-xs sm:text-sm font-bold mb-2">
+          <label class="block text-xs font-bold text-blue-900 mb-1">Đáp án gợi ý nhóm 2 (cách nhau dấu phẩy):</label>
+          <input type="text" id="editGroup2AnswersInput" class="w-full px-3 py-2 rounded-xl border border-blue-200 text-xs">
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-2 justify-end pt-3 border-t border-slate-100">
+        <button onclick="App.saveStoryContent(true)" class="px-5 py-2.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-800 font-bold text-sm">
+          LƯU BẢN NHÁP
+        </button>
+        <button onclick="App.saveStoryContent(false)" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md">
+          LƯU VÀ XÁC NHẬN
+        </button>
+        <button onclick="App.closeEditStoryModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-sm">
+          Hủy
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Xem và Sửa bài học sinh (Giữ nguyên bài gốc, ghi nhận bản sửa) -->
+  <div id="modalReviewSubmission" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-2xl space-y-5">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <h3 class="text-xl font-black text-slate-800 flex items-center gap-2">
+            <span>📝</span> ĐỐI CHIẾU & CHỈNH SỬA BÀI HỌC SINH
+          </h3>
+          <p class="text-xs text-rose-500 font-bold mt-0.5">
+            * Nguyên tắc: Bài làm gốc của học sinh được lưu giữ vĩnh viễn, không bị ghi đè.
+          </p>
+        </div>
+        <button onclick="App.closeReviewModal()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+      </div>
+
+      <!-- Thông tin học sinh -->
+      <div id="reviewStudentBanner" class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs sm:text-sm grid grid-cols-2 sm:grid-cols-4 gap-3 text-slate-700">
+        <!-- Render thông tin học sinh -->
+      </div>
+
+      <!-- Bảng đối chiếu hai nhóm -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Khu vực 1 của giáo viên biên tập -->
+        <div class="bg-purple-50/50 rounded-2xl p-4 border border-purple-200">
+          <div class="flex items-center justify-between mb-2">
+            <h4 id="reviewGroup1Header" class="font-extrabold text-purple-900 text-xs sm:text-sm">NHÓM 1: TIẾNG NHẠC</h4>
+            <span class="text-[11px] text-purple-600 font-bold">Chạm để chuyển sang Nhóm 2 ⇄</span>
+          </div>
+          <div id="reviewGroup1Cards" class="min-h-[110px] bg-white rounded-xl p-2.5 border border-purple-100 flex flex-wrap gap-2 content-start">
+            <!-- Thẻ nhóm 1 -->
+          </div>
+        </div>
+
+        <!-- Khu vực 2 của giáo viên biên tập -->
+        <div class="bg-blue-50/50 rounded-2xl p-4 border border-blue-200">
+          <div class="flex items-center justify-between mb-2">
+            <h4 id="reviewGroup2Header" class="font-extrabold text-blue-900 text-xs sm:text-sm">NHÓM 2: DÒNG SÔNG</h4>
+            <span class="text-[11px] text-blue-600 font-bold">Chạm để chuyển sang Nhóm 1 ⇄</span>
+          </div>
+          <div id="reviewGroup2Cards" class="min-h-[110px] bg-white rounded-xl p-2.5 border border-blue-100 flex flex-wrap gap-2 content-start">
+            <!-- Thẻ nhóm 2 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Thêm từ mới thủ công vào bài của giáo viên -->
+      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-wrap items-center gap-2">
+        <span class="text-xs font-bold text-slate-700">Thêm từ bổ sung:</span>
+        <input type="text" id="teacherAddWordInput" placeholder="Nhập từ..." class="px-3 py-1.5 rounded-xl border border-slate-300 text-xs flex-grow sm:flex-grow-0 sm:w-48">
+        <button onclick="App.teacherAddWordToGroup(1)" class="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs transition">
+          + Nhóm 1
+        </button>
+        <button onclick="App.teacherAddWordToGroup(2)" class="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition">
+          + Nhóm 2
+        </button>
+      </div>
+
+      <!-- Nhận xét của giáo viên -->
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">Lời nhận xét & Lời khen của Thầy/Cô:</label>
+        <textarea id="teacherFeedbackText" rows="3" placeholder="Ví dụ: Em tìm từ rất tốt, hãy chú ý thêm từ miêu tả cảm xúc nhé!" class="w-full p-3 rounded-xl border border-slate-200 text-sm"></textarea>
+      </div>
+
+      <!-- Nút lưu kết quả chấm -->
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100">
+        <button onclick="App.closeReviewModal()" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm">
+          Đóng
+        </button>
+        <button onclick="App.saveTeacherReview()" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-md transition">
+          💾 LƯU BẢN CHỈNH SỬA & NHẬN XÉT
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== TOÀN BỘ SCRIPT JAVASCRIPT ======================== -->
   <script>
-    (function() {
-      // Dữ liệu câu chuyện
-      var storyText = "Bét-tô-ven là nhà soạn nhạc cổ điển vĩ đại trên thế giới. Ông đã sáng tác nhiều bản nhạc nổi tiếng, trong số đó có Bản xô-nát Ánh trăng. Tương truyền, vào một đêm trăng sáng, Bét-tô ven đến cây cầu bắc qua dòng sông Đa-nuýp xinh đẹp trong thành Viên. Đứng trên cầu, ông say sưa ngắm dòng sông lấp lánh ánh trăng trong một không gian tĩnh lặng. Bỗng Bét-tô-ven nghe thấy tiếng dương cầm văng vẳng ở phía xa. Những nốt nhạc ngẫu hứng vang lên, lúc êm ái, nhẹ nhàng như ánh trăng, lúc lại mạnh mẽ như sóng sông Đa-nuýp. Tiếng dương cầm da diết của người thiếu nữ mù làm ông vô cùng xúc động. Bản xô-nát Ánh trăng ra đời từ đó.";
+    /**
+     * HỆ THỐNG TRÒ CHƠI GIÁO DỤC NỘI BỘ
+     * Nhà Thám Hiểm Tính Từ - Ngọc Dân Digital Classroom
+     */
 
-      // Danh mục nhận diện từ ghép liền khối
-      var compounds = [
-        "bản xô-nát ánh trăng", "bét-tô-ven", "đa-nuýp", "cổ điển", "vĩ đại",
-        "nổi tiếng", "xinh đẹp", "lấp lánh", "tĩnh lặng", "văng vẳng",
-        "ngẫu hứng", "êm ái", "nhẹ nhàng", "mạnh mẽ", "da diết", "xúc động", "say sưa"
-      ];
+    // Dữ liệu mặc định của trò chơi
+    const DEFAULT_GAME_DATA = {
+      game_code: "TINHTU2026",
+      title: "Nhà Thám Hiểm Tính Từ",
+      reading_title: "BÉT-TÔ-VEN VÀ BẢN XÔ-NÁT ÁNH TRĂNG",
+      instruction: "1. Đọc kỹ bài văn.\n2. Chạm vào các tính từ để tạo thẻ từ.\n3. Kéo thả thẻ từ vào đúng hai nhóm phù hợp.\n4. Nhấn HOÀN THÀNH - NỘP BÀI.",
+      reading_content: `Bét-tô-ven là nhà soạn nhạc cổ điển vĩ đại trên thế giới. Ông đã sáng tác nhiều bản nhạc nổi tiếng, trong số đó có Bản xô-nát Ánh trăng.
+Tương truyền, vào một đêm trăng sáng, Bét-tô ven đến cây cầu bắc qua dòng sông Đa-nuýp xinh đẹp trong thành Viên. Đứng trên cầu, ông say sưa ngắm dòng sông lấp lánh ánh trăng trong một không gian tĩnh lặng. Bỗng Bét-tô-ven nghe thấy tiếng dương cầm văng vẳng ở phía xa. Tiếng đàn đã đưa bước chân Bét-tô-ven đến một ngôi nhà trong khu lao động. Đến đó, ông bắt gặp một người cha đang chăm chú ngồi nghe cô con gái mù của mình chơi đàn.
+Thấy Bét-tô-ven, người cha đau khổ chia sẻ rằng: Con gái ông có một ước mơ duy nhất là được ngắm nhìn ánh trăng trên dòng Đa-nuýp. Nhưng ông rất buồn vì chẳng bao giờ ông có thể giúp con thực hiện được ước mơ của mình.
+Xúc động trước tình cảm của người cha dành cho con gái và tiếng dương cầm da diết của người thiếu nữ mù, Bét-tô-ven đến bên cây đàn, ngồi xuống và bắt đầu chơi. Những nốt nhạc ngẫu hứng vang lên, tràn đầy cảm xúc yêu thương của nhà soạn nhạc thiên tài, lúc êm ái, nhẹ nhàng như ánh trăng, lúc lại mạnh mẽ như sóng sông Đa-nuýp. Trong tâm trí của hai cha con, dường như không còn cuộc sống khổ đau vì tật bệnh, chỉ còn một thế giới huyền ảo, lung linh, tràn ngập ánh trăng. Cô gái mù có cảm giác mình đang được ngắm nhìn, đùa giỡn với ánh trăng trên dòng sông Đa-nuýp.
+Bản xô-nát Ánh trăng ra đời từ đó.`,
+      group1_name: "TÍNH TỪ CHỈ ĐẶC ĐIỂM CỦA TIẾNG NHẠC",
+      group2_name: "TÍNH TỪ CHỈ ĐẶC ĐIỂM CỦA DÒNG SÔNG",
+      default_answers: {
+        group1: ["da diết", "êm ái", "nhẹ nhàng", "mạnh mẽ"],
+        group2: ["xinh đẹp", "lấp lánh"]
+      },
+      // Danh mục nhận diện từ ghép/từ phức tiếng Việt liền khối
+      compound_dictionary: [
+        "bản xô-nát ánh trăng", "bản xô-nát", "ánh trăng", "bét-tô-ven", "bét-tô ven", "đa-nuýp",
+        "da diết", "êm ái", "nhẹ nhàng", "mạnh mẽ", "xinh đẹp", "lấp lánh", "tĩnh lặng", "văng vẳng",
+        "cổ điển", "vĩ đại", "nổi tiếng", "chăm chú", "đau khổ", "xúc động", "tràn ngập", "huyền ảo",
+        "lung linh", "say sưa", "ngẫu hứng", "thiên tài", "khổ đau", "tật bệnh", "đùa giỡn",
+        "nhà soạn nhạc", "thành viên", "khu lao động", "dương cầm", "người thiếu nữ", "tiếng đàn",
+        "tiếng dương cầm", "bước chân", "yêu thương", "tâm trí", "ước mơ", "sáng tác", "tương truyền"
+      ]
+    };
 
-      var selectedWords = [];
-      var group1Words = [];
-      var group2Words = [];
+    const App = {
+      // Trạng thái ứng dụng
+      state: {
+        sound: true,
+        gameConfig: null,
+        currentStudent: { name: "", class: "", code: "", startTime: 0 },
+        selectedWords: new Set(),
+        group1Words: new Set(),
+        group2Words: new Set(),
+        activeDragWord: null,
+        submissions: [],
+        currentReviewIndex: null,
+        reviewTempG1: [],
+        reviewTempG2: []
+      },
 
-      // Âm thanh đơn giản không cần tải tệp
-      function playBeep(freq, duration) {
+      // 1. BỘ TẠO ÂM THANH NỘI BỘ (Web Audio API - Không cần tải file ngoài)
+      audioCtx: null,
+      playSound(type) {
+        if (!this.state.sound) return;
         try {
-          var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-          var osc = audioCtx.createOscillator();
-          var gain = audioCtx.createGain();
+          if (!this.audioCtx) {
+            this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          const ctx = this.audioCtx;
+          if (ctx.state === 'suspended') ctx.resume();
+
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
           osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.frequency.value = freq;
-          gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
-          osc.start();
-          osc.stop(audioCtx.currentTime + duration);
-        } catch(e) {}
-      }
+          gain.connect(ctx.destination);
 
-      // Khởi tạo bài văn
-      function initStory() {
-        var container = document.getElementById("storyContainer");
-        container.innerHTML = "";
-        var words = storyText.split(" ");
-        var i = 0;
+          if (type === 'click') {
+            osc.frequency.setValueAtTime(520, ctx.currentTime);
+            gain.gain.setValueAtTime(0.12, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+            osc.start(); osc.stop(ctx.currentTime + 0.08);
+          } else if (type === 'drop') {
+            osc.frequency.setValueAtTime(340, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(680, ctx.currentTime + 0.12);
+            gain.gain.setValueAtTime(0.15, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+            osc.start(); osc.stop(ctx.currentTime + 0.12);
+          } else if (type === 'victory') {
+            const notes = [523.25, 659.25, 783.99, 1046.5];
+            notes.forEach((freq, idx) => {
+              const o = ctx.createOscillator();
+              const g = ctx.createGain();
+              o.connect(g); g.connect(ctx.destination);
+              o.frequency.value = freq;
+              g.gain.setValueAtTime(0.1, ctx.currentTime + idx * 0.08);
+              g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (idx + 1) * 0.15);
+              o.start(ctx.currentTime + idx * 0.08);
+              o.stop(ctx.currentTime + (idx + 1) * 0.15);
+            });
+          }
+        } catch (e) {}
+      },
 
-        while (i < words.length) {
-          var matched = false;
-          // Thử ghép cụm 3 từ, 2 từ
-          for (var len = 3; len >= 2; len--) {
-            if (i + len <= words.length) {
-              var phrase = words.slice(i, i + len).join(" ");
-              var cleanPhrase = phrase.replace(/[.,;:"“”!?()]/g, "").toLowerCase();
-              if (compounds.indexOf(cleanPhrase) !== -1) {
-                createWordSpan(container, phrase, cleanPhrase);
-                i += len;
-                matched = true;
+      toggleSound() {
+        this.state.sound = !this.state.sound;
+        const text = document.getElementById('soundStatusText');
+        text.textContent = this.state.sound ? "Bật" : "Tắt";
+        const btn = document.getElementById('soundToggleBtn');
+        btn.classList.toggle('opacity-60', !this.state.sound);
+      },
+
+      // 2. KHỞI TẠO BÀI ĐỌC TƯƠNG TÁC
+      init() {
+        // Tải cấu hình hoặc dùng mặc định
+        const savedConfig = localStorage.getItem('nd_explorer_game_config');
+        this.state.gameConfig = savedConfig ? JSON.parse(savedConfig) : JSON.parse(JSON.stringify(DEFAULT_GAME_DATA));
+
+        // Tải các bài nộp đã lưu
+        const savedSubmissions = localStorage.getItem('nd_explorer_submissions');
+        this.state.submissions = savedSubmissions ? JSON.parse(savedSubmissions) : [];
+
+        // Kiểm tra tham số ?code=...
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('code')) {
+          document.getElementById('joinGameCode').value = urlParams.get('code');
+        }
+
+        this.setupDropZones();
+        this.updateTeacherStats();
+      },
+
+      // 3. TÁCH TỪ VÀ BẮT SỰ KIỆN CHẠM TỪ / BÔI CHỌN CỤM TỪ
+      // Thuật toán nhận diện cụm từ ghép (Compound Matching) giữ nguyên ngữ cảnh tự nhiên
+      tokenizeVietnameseText(paragraphText) {
+        // Lấy danh mục từ ghép được cấu hình hoặc bổ sung từ đáp án
+        const compDict = (this.state.gameConfig.compound_dictionary || [])
+          .concat(this.state.gameConfig.default_answers.group1)
+          .concat(this.state.gameConfig.default_answers.group2)
+          .map(w => w.trim().toLowerCase())
+          .filter(Boolean);
+
+        // Sắp xếp ưu tiên cụm từ dài hơn khớp trước
+        const sortedDict = Array.from(new Set(compDict)).sort((a, b) => b.length - a.length);
+
+        const tokens = [];
+        let i = 0;
+        const text = paragraphText;
+        const len = text.length;
+
+        const isPunctuationOrSpace = (ch) => /[\s.,;:"“”!?()—–]/.test(ch);
+
+        while (i < len) {
+          // Bỏ qua khoảng trắng và dấu câu, giữ lại nguyên vẹn
+          if (isPunctuationOrSpace(text[i])) {
+            let punct = '';
+            while (i < len && isPunctuationOrSpace(text[i])) {
+              punct += text[i];
+              i++;
+            }
+            tokens.push({ type: 'punct', text: punct });
+            continue;
+          }
+
+          // Kiểm tra xem tại vị trí này có bắt đầu một từ ghép/cụm từ vị nào không
+          let matched = null;
+          const remainingText = text.substring(i);
+          const remainingLower = remainingText.toLowerCase();
+
+          for (const phrase of sortedDict) {
+            if (remainingLower.startsWith(phrase)) {
+              const phraseLen = phrase.length;
+              // Đảm bảo khớp trọn vẹn ranh giới từ (ký tự sau là dấu câu, khoảng trắng hoặc hết chuỗi)
+              const nextChar = remainingText[phraseLen];
+              if (!nextChar || isPunctuationOrSpace(nextChar)) {
+                matched = text.substr(i, phraseLen);
+                i += phraseLen;
                 break;
               }
             }
           }
-          if (!matched) {
-            var single = words[i];
-            var cleanSingle = single.replace(/[.,;:"“”!?()]/g, "").toLowerCase();
-            createWordSpan(container, single, cleanSingle);
-            i++;
-          }
-        }
-      }
 
-      function createWordSpan(container, raw, clean) {
-        var span = document.createElement("span");
-        span.className = "word-token";
-        span.textContent = raw;
-        span.setAttribute("data-word", clean);
-        span.addEventListener("click", function() {
-          toggleWord(clean);
-        });
-        container.appendChild(span);
-        container.appendChild(document.createTextNode(" "));
-      }
-
-      function toggleWord(word) {
-        playBeep(520, 0.08);
-        var idx = selectedWords.indexOf(word);
-        if (idx !== -1) {
-          selectedWords.splice(idx, 1);
-          removeFromGroup(group1Words, word);
-          removeFromGroup(group2Words, word);
-        } else {
-          selectedWords.push(word);
-        }
-        renderState();
-      }
-
-      function removeFromGroup(arr, item) {
-        var pos = arr.indexOf(item);
-        if (pos !== -1) arr.splice(pos, 1);
-      }
-
-      function renderState() {
-        // Cập nhật highlight chữ trong bài
-        var tokens = document.querySelectorAll(".word-token");
-        for (var i = 0; i < tokens.length; i++) {
-          var w = tokens[i].getAttribute("data-word");
-          if (selectedWords.indexOf(w) !== -1) {
-            tokens[i].classList.add("selected");
+          if (matched) {
+            tokens.push({ type: 'word', text: matched, isCompound: true });
           } else {
-            tokens[i].classList.remove("selected");
+            // Nếu không phải từ ghép, lấy trọn vẹn 1 tiếng đơn lẻ
+            let singleWord = '';
+            while (i < len && !isPunctuationOrSpace(text[i])) {
+              singleWord += text[i];
+              i++;
+            }
+            tokens.push({ type: 'word', text: singleWord, isCompound: false });
           }
         }
+        return tokens;
+      },
 
-        // Cập nhật số lượng
-        document.getElementById("badgeCount").textContent = selectedWords.length + " thẻ";
-        document.getElementById("emptyHint").style.display = selectedWords.length === 0 ? "block" : "none";
+      renderReadingStory() {
+        const container = document.getElementById('storyContainer');
+        container.innerHTML = '';
+        const content = this.state.gameConfig.reading_content;
+        const paragraphs = content.split('\n');
 
-        // Render các nhóm thẻ
-        var pool = document.getElementById("dockPool");
-        var g1 = document.getElementById("zoneG1");
-        var g2 = document.getElementById("zoneG2");
+        paragraphs.forEach(pText => {
+          if (!pText.trim()) return;
+          const p = document.createElement('p');
+          p.className = 'mb-3.5 leading-relaxed';
+
+          const tokens = this.tokenizeVietnameseText(pText);
+          tokens.forEach(tok => {
+            if (tok.type === 'punct') {
+              p.appendChild(document.createTextNode(tok.text));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'word-token';
+              span.textContent = tok.text;
+              span.dataset.raw = tok.text.trim();
+              span.title = "Chạm để tạo thẻ từ";
+              span.onclick = () => App.handleWordClick(tok.text.trim());
+              p.appendChild(span);
+            }
+          });
+          container.appendChild(p);
+        });
+
+        // Bôi chọn cụm từ ghép tự do của học sinh
+        container.onmouseup = container.ontouchend = () => {
+          const selection = window.getSelection().toString().trim();
+          if (selection.length >= 2 && selection.length < 35 && !selection.includes('\n')) {
+            const clean = selection.replace(/[.,;:"“”!?()—–]/g, '').trim().toLowerCase();
+            if (clean) App.addWordToPool(clean);
+          }
+        };
+
+        this.syncTokenHighlights();
+      },
+
+      handleWordClick(raw) {
+        const clean = raw.replace(/[.,;:"“”!?()—–]/g, '').trim().toLowerCase();
+        if (!clean) return;
+        this.playSound('click');
+
+        if (this.state.selectedWords.has(clean)) {
+          // Bỏ chọn
+          this.state.selectedWords.delete(clean);
+          this.state.group1Words.delete(clean);
+          this.state.group2Words.delete(clean);
+        } else {
+          // Chọn từ nguyên khối
+          this.state.selectedWords.add(clean);
+        }
+
+        this.syncTokenHighlights();
+        this.renderAllCards();
+      },
+
+      addWordToPool(word) {
+        word = word.toLowerCase();
+        if (!this.state.selectedWords.has(word)) {
+          this.playSound('click');
+          this.state.selectedWords.add(word);
+          this.syncTokenHighlights();
+          this.renderAllCards();
+        }
+      },
+
+      syncTokenHighlights() {
+        document.querySelectorAll('.word-token').forEach(el => {
+          const w = el.dataset.raw.toLowerCase();
+          el.classList.toggle('selected', this.state.selectedWords.has(w));
+        });
+      },
+
+      // 4. KÉO THẢ THẺ TỪ (HỖ TRỢ MOUSE, TOUCH DI ĐỘNG & NÚT ĐIỀU HƯỚNG NHANH)
+      createCardElement(word, currentZone) {
+        const card = document.createElement('div');
+        card.className = 'word-card inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold text-xs sm:text-sm bg-pastelYellow border-2 border-amber-300 text-slate-800 shadow-sm';
+        card.draggable = true;
+
+        const textSpan = document.createElement('span');
+        textSpan.textContent = word;
+        card.appendChild(textSpan);
+
+        // Nút bấm chuyển nhóm nhanh trên điện thoại/máy tính bảng
+        if (currentZone === 'pool') {
+          const btnToG1 = document.createElement('button');
+          btnToG1.className = 'px-1.5 py-0.5 rounded-md bg-purple-100 hover:bg-purple-200 text-purple-700 font-extrabold text-[10px] ml-1';
+          btnToG1.title = 'Đưa vào Nhóm 1';
+          btnToG1.textContent = '🎵 N1';
+          btnToG1.onclick = (e) => {
+            e.stopPropagation();
+            App.moveWordToZone(word, 'group1');
+          };
+          card.appendChild(btnToG1);
+
+          const btnToG2 = document.createElement('button');
+          btnToG2.className = 'px-1.5 py-0.5 rounded-md bg-blue-100 hover:bg-blue-200 text-blue-700 font-extrabold text-[10px]';
+          btnToG2.title = 'Đưa vào Nhóm 2';
+          btnToG2.textContent = '🌊 N2';
+          btnToG2.onclick = (e) => {
+            e.stopPropagation();
+            App.moveWordToZone(word, 'group2');
+          };
+          card.appendChild(btnToG2);
+        } else {
+          // Nút đảo chuyển nhóm hoặc đưa về lại khay
+          const btnSwitch = document.createElement('button');
+          btnSwitch.className = 'px-1 py-0.5 rounded-md bg-amber-200/80 hover:bg-amber-300 text-amber-900 font-extrabold text-[10px] ml-1';
+          btnSwitch.title = 'Đổi sang nhóm kia';
+          btnSwitch.textContent = '⇄';
+          btnSwitch.onclick = (e) => {
+            e.stopPropagation();
+            App.moveWordToZone(word, currentZone === 'group1' ? 'group2' : 'group1');
+          };
+          card.appendChild(btnSwitch);
+
+          const btnBack = document.createElement('button');
+          btnBack.className = 'px-1 py-0.5 rounded-md bg-slate-200/80 hover:bg-slate-300 text-slate-700 font-extrabold text-[10px]';
+          btnBack.title = 'Đưa về khay';
+          btnBack.textContent = '↩';
+          btnBack.onclick = (e) => {
+            e.stopPropagation();
+            App.moveWordToZone(word, 'pool');
+          };
+          card.appendChild(btnBack);
+        }
+
+        // Nút xóa thẻ hoàn toàn
+        const btnDel = document.createElement('button');
+        btnDel.className = 'w-4 h-4 rounded-full bg-slate-200/80 hover:bg-rose-200 text-slate-600 hover:text-rose-700 flex items-center justify-center text-[10px] font-black ml-0.5';
+        btnDel.innerHTML = '&times;';
+        btnDel.title = 'Xóa thẻ này';
+        btnDel.onclick = (e) => {
+          e.stopPropagation();
+          App.state.selectedWords.delete(word);
+          App.state.group1Words.delete(word);
+          App.state.group2Words.delete(word);
+          App.syncTokenHighlights();
+          App.renderAllCards();
+        };
+        card.appendChild(btnDel);
+
+        // Kéo thả chuột
+        card.ondragstart = (e) => {
+          this.state.activeDragWord = word;
+          e.dataTransfer.setData('text/plain', word);
+        };
+
+        // Kéo thả cảm ứng Touch (Mobile & iPad)
+        card.ontouchstart = () => {
+          this.state.activeDragWord = word;
+          card.classList.add('opacity-50');
+        };
+        card.ontouchend = (e) => {
+          card.classList.remove('opacity-50');
+          const touch = e.changedTouches[0];
+          const elem = document.elementFromPoint(touch.clientX, touch.clientY);
+          if (elem) {
+            const zone = elem.closest('.drop-zone');
+            if (zone) {
+              const targetZone = zone.dataset.zone;
+              App.moveWordToZone(word, targetZone);
+            }
+          }
+        };
+
+        return card;
+      },
+
+      renderAllCards() {
+        const pool = document.getElementById('dockPool');
+        const g1 = document.getElementById('zoneGroup1');
+        const g2 = document.getElementById('zoneGroup2');
+        const countBadge = document.getElementById('selectedCountBadge');
+        const emptyHint = document.getElementById('emptyPoolHint');
 
         // Xóa các thẻ cũ
-        var chips = document.querySelectorAll(".word-chip");
-        for (var c = 0; c < chips.length; c++) chips[c].remove();
+        pool.querySelectorAll('.word-card').forEach(c => c.remove());
+        g1.innerHTML = '';
+        g2.innerHTML = '';
 
-        selectedWords.forEach(function(word) {
-          var chip = document.createElement("div");
-          chip.className = "word-chip";
-          chip.innerHTML = "<span>" + word + "</span>";
+        countBadge.textContent = `${this.state.selectedWords.size} thẻ`;
+        emptyHint.style.display = this.state.selectedWords.size === 0 ? 'block' : 'none';
 
-          if (group1Words.indexOf(word) !== -1) {
-            // Đang ở nhóm 1
-            var btnSwap = document.createElement("button");
-            btnSwap.className = "chip-btn btn-swap";
-            btnSwap.title = "Đổi sang Nhóm 2";
-            btnSwap.textContent = "⇄ N2";
-            btnSwap.onclick = function() {
-              removeFromGroup(group1Words, word);
-              group2Words.push(word);
-              playBeep(440, 0.08);
-              renderState();
-            };
-            chip.appendChild(btnSwap);
-
-            var btnBack = document.createElement("button");
-            btnBack.className = "chip-btn btn-back";
-            btnBack.title = "Đưa về khay";
-            btnBack.textContent = "↩";
-            btnBack.onclick = function() {
-              removeFromGroup(group1Words, word);
-              renderState();
-            };
-            chip.appendChild(btnBack);
-
-            g1.appendChild(chip);
-          } else if (group2Words.indexOf(word) !== -1) {
-            // Đang ở nhóm 2
-            var btnSwap = document.createElement("button");
-            btnSwap.className = "chip-btn btn-swap";
-            btnSwap.title = "Đổi sang Nhóm 1";
-            btnSwap.textContent = "⇄ N1";
-            btnSwap.onclick = function() {
-              removeFromGroup(group2Words, word);
-              group1Words.push(word);
-              playBeep(440, 0.08);
-              renderState();
-            };
-            chip.appendChild(btnSwap);
-
-            var btnBack = document.createElement("button");
-            btnBack.className = "chip-btn btn-back";
-            btnBack.title = "Đưa về khay";
-            btnBack.textContent = "↩";
-            btnBack.onclick = function() {
-              removeFromGroup(group2Words, word);
-              renderState();
-            };
-            chip.appendChild(btnBack);
-
-            g2.appendChild(chip);
+        this.state.selectedWords.forEach(word => {
+          if (this.state.group1Words.has(word)) {
+            g1.appendChild(this.createCardElement(word, 'group1'));
+          } else if (this.state.group2Words.has(word)) {
+            g2.appendChild(this.createCardElement(word, 'group2'));
           } else {
-            // Ở khay chờ
-            var btnTo1 = document.createElement("button");
-            btnTo1.className = "chip-btn btn-to-g1";
-            btnTo1.textContent = "🎵 N1";
-            btnTo1.onclick = function() {
-              group1Words.push(word);
-              playBeep(380, 0.08);
-              renderState();
-            };
-            chip.appendChild(btnTo1);
-
-            var btnTo2 = document.createElement("button");
-            btnTo2.className = "chip-btn btn-to-g2";
-            btnTo2.textContent = "🌊 N2";
-            btnTo2.onclick = function() {
-              group2Words.push(word);
-              playBeep(380, 0.08);
-              renderState();
-            };
-            chip.appendChild(btnTo2);
-
-            pool.appendChild(chip);
+            pool.appendChild(this.createCardElement(word, 'pool'));
           }
-
-          // Nút xóa thẻ
-          var btnDel = document.createElement("button");
-          btnDel.className = "btn-del";
-          btnDel.innerHTML = "&times;";
-          btnDel.onclick = function() {
-            toggleWord(word);
-          };
-          chip.appendChild(btnDel);
         });
-      }
+      },
 
-      // Xử lý sự kiện nút bấm
-      document.getElementById("btnStartGame").addEventListener("click", function() {
-        var name = document.getElementById("studentName").value.trim();
-        var cls = document.getElementById("studentClass").value;
+      setupDropZones() {
+        document.querySelectorAll('.drop-zone').forEach(zone => {
+          zone.ondragover = (e) => {
+            e.preventDefault();
+            zone.classList.add('drag-active');
+          };
+          zone.ondragleave = () => {
+            zone.classList.remove('drag-active');
+          };
+          zone.ondrop = (e) => {
+            e.preventDefault();
+            zone.classList.remove('drag-active');
+            const word = e.dataTransfer.getData('text/plain') || App.state.activeDragWord;
+            if (word) {
+              App.moveWordToZone(word, zone.dataset.zone);
+            }
+          };
+        });
+      },
+
+      moveWordToZone(word, zoneName) {
+        this.playSound('drop');
+        if (zoneName === 'group1') {
+          this.state.group1Words.add(word);
+          this.state.group2Words.delete(word);
+        } else if (zoneName === 'group2') {
+          this.state.group2Words.add(word);
+          this.state.group1Words.delete(word);
+        } else if (zoneName === 'pool') {
+          this.state.group1Words.delete(word);
+          this.state.group2Words.delete(word);
+        }
+        this.renderAllCards();
+      },
+
+      // 5. LUỒNG CHƠI CỦA HỌC SINH
+      startStudentGame() {
+        const code = document.getElementById('joinGameCode').value.trim().toUpperCase();
+        const name = document.getElementById('studentName').value.trim();
+        const cls = document.getElementById('studentClass').value;
+
         if (!name) {
-          alert("Em hãy nhập họ và tên trước khi bắt đầu nhé!");
+          alert('Em vui lòng nhập Họ và tên trước khi bắt đầu nhé!');
           return;
         }
-        document.getElementById("displayBadge").textContent = name + " (" + cls + ")";
-        document.getElementById("viewStart").classList.add("hidden");
-        document.getElementById("viewGame").classList.remove("hidden");
-        initStory();
-        renderState();
-      });
 
-      document.getElementById("btnSubmitGame").addEventListener("click", function() {
-        if (selectedWords.length === 0) {
-          alert("Em chưa chọn được tính từ nào. Hãy chạm vào các từ miêu tả trong bài văn nhé!");
+        if (code !== this.state.gameConfig.game_code) {
+          alert('Mã game chưa chính xác hoặc đã kết thúc!');
           return;
         }
-        playBeep(650, 0.2);
-        document.getElementById("viewGame").classList.add("hidden");
-        document.getElementById("viewSuccess").classList.remove("hidden");
-      });
 
-      document.getElementById("btnPlayAgain").addEventListener("click", function() {
-        selectedWords = [];
-        group1Words = [];
-        group2Words = [];
-        document.getElementById("studentName").value = "";
-        document.getElementById("viewSuccess").classList.add("hidden");
-        document.getElementById("viewStart").classList.remove("hidden");
-      });
+        this.state.currentStudent = {
+          name: name,
+          class: cls,
+          code: code,
+          startTime: Date.now()
+        };
 
-    })();
+        // Reset bộ thẻ
+        this.state.selectedWords.clear();
+        this.state.group1Words.clear();
+        this.state.group2Words.clear();
+
+        // Gán nội dung
+        document.getElementById('displayStudentBadge').textContent = `${name} (${cls})`;
+        document.getElementById('displayStoryTitle').textContent = this.state.gameConfig.reading_title;
+        document.getElementById('displayGroup1Title').textContent = this.state.gameConfig.group1_name;
+        document.getElementById('displayGroup2Title').textContent = this.state.gameConfig.group2_name;
+        document.getElementById('studentInstruction').innerText = this.state.gameConfig.instruction;
+
+        this.renderReadingStory();
+        this.renderAllCards();
+
+        document.getElementById('viewHome').classList.add('hidden');
+        document.getElementById('viewStudentGame').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+
+      confirmSubmitModal() {
+        const total = this.state.selectedWords.size;
+        const g1 = this.state.group1Words.size;
+        const g2 = this.state.group2Words.size;
+
+        if (total === 0) {
+          alert('Em chưa tìm thấy tính từ nào. Hãy chạm vào các từ miêu tả trong bài văn nhé!');
+          return;
+        }
+
+        const summary = document.getElementById('confirmSubmitSummary');
+        summary.innerHTML = `
+          Em đã tìm được <strong class="text-blue-600">${total} thẻ từ</strong>.<br>
+          - Nhóm 1: <strong>${g1} từ</strong><br>
+          - Nhóm 2: <strong>${g2} từ</strong><br>
+          Em có chắc chắn muốn nộp bài lên máy chủ lớp học không?
+        `;
+        document.getElementById('modalConfirmSubmit').classList.remove('hidden');
+      },
+
+      closeConfirmModal() {
+        document.getElementById('modalConfirmSubmit').classList.add('hidden');
+      },
+
+      performSubmitWork() {
+        this.closeConfirmModal();
+        const duration = Math.round((Date.now() - this.state.currentStudent.startTime) / 1000);
+
+        const newSubmission = {
+          id: Date.now(),
+          game_code: this.state.currentStudent.code,
+          student_name: this.state.currentStudent.name,
+          student_class: this.state.currentStudent.class,
+          duration_seconds: duration,
+          submitted_at: new Date().toLocaleString('vi-VN'),
+          // Dữ liệu gốc của học sinh (bất biến)
+          original_selected_words: Array.from(this.state.selectedWords),
+          original_group1_words: Array.from(this.state.group1Words),
+          original_group2_words: Array.from(this.state.group2Words),
+          // Dữ liệu biên tập của giáo viên
+          teacher_edited: false,
+          edited_group1_words: Array.from(this.state.group1Words),
+          edited_group2_words: Array.from(this.state.group2Words),
+          teacher_note: "",
+          reviewed_at: null
+        };
+
+        // Lưu vào kho dữ liệu nội bộ
+        this.state.submissions.unshift(newSubmission);
+        localStorage.setItem('nd_explorer_submissions', JSON.stringify(this.state.submissions));
+
+        this.playSound('victory');
+
+        // Mở màn hình ăn mừng
+        document.getElementById('doneStudentName').textContent = `${newSubmission.student_name} (${newSubmission.student_class})`;
+        document.getElementById('doneCardCount').textContent = `${this.state.selectedWords.size} thẻ từ`;
+        document.getElementById('doneSubmitTime').textContent = newSubmission.submitted_at;
+        document.getElementById('modalSuccessCelebration').classList.remove('hidden');
+      },
+
+      goHome() {
+        document.getElementById('modalSuccessCelebration').classList.add('hidden');
+        document.getElementById('viewStudentGame').classList.add('hidden');
+        document.getElementById('viewTeacherDashboard').classList.add('hidden');
+        document.getElementById('viewHome').classList.remove('hidden');
+      },
+
+      // 6. CHẾ ĐỘ GIÁO VIÊN NỘI BỘ
+      openTeacherModal() {
+        document.getElementById('modalTeacherAuth').classList.remove('hidden');
+      },
+
+      closeTeacherModal() {
+        document.getElementById('modalTeacherAuth').classList.add('hidden');
+      },
+
+      loginTeacher() {
+        const u = document.getElementById('teacherUserInput').value.trim();
+        const p = document.getElementById('teacherPassInput').value;
+
+        if (u === 'giaovien' && p === 'ThayGiao2026@') {
+          this.closeTeacherModal();
+          this.loadTeacherDashboard();
+        } else {
+          alert('Tài khoản hoặc mật khẩu giáo viên không chính xác!');
+        }
+      },
+
+      logoutTeacher() {
+        this.goHome();
+      },
+
+      loadTeacherDashboard() {
+        document.getElementById('viewHome').classList.add('hidden');
+        document.getElementById('viewStudentGame').classList.add('hidden');
+        document.getElementById('viewTeacherDashboard').classList.remove('hidden');
+
+        this.updateTeacherStats();
+        this.renderSubmissionsTable();
+      },
+
+      updateTeacherStats() {
+        const subs = this.state.submissions;
+        const total = subs.length;
+        const reviewed = subs.filter(s => s.teacher_edited).length;
+        const pending = total - reviewed;
+
+        document.getElementById('statTotalSubmissions').textContent = total;
+        document.getElementById('statReviewedSubmissions').textContent = reviewed;
+        document.getElementById('statPendingSubmissions').textContent = pending;
+        document.getElementById('badgeActiveGameCode').textContent = `Mã Game: ${this.state.gameConfig.game_code}`;
+      },
+
+      renderSubmissionsTable() {
+        const tbody = document.getElementById('submissionTableBody');
+        tbody.innerHTML = '';
+
+        if (this.state.submissions.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="7" class="p-6 text-center text-slate-400 font-medium">
+                Chưa có học sinh nào nộp bài. Em học sinh có thể vào làm ngay trên trang chủ!
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        this.state.submissions.forEach((sub, idx) => {
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-50/80 transition';
+          tr.innerHTML = `
+            <td class="p-4 font-bold text-slate-500">${idx + 1}</td>
+            <td class="p-4 font-extrabold text-slate-800">${sub.student_name}</td>
+            <td class="p-4 font-semibold text-slate-600">${sub.student_class}</td>
+            <td class="p-4 text-xs text-slate-500">${sub.submitted_at}</td>
+            <td class="p-4">
+              <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-full font-bold">
+                ${sub.original_selected_words.length} thẻ
+              </span>
+            </td>
+            <td class="p-4">
+              <span class="px-2.5 py-1 rounded-full text-xs font-black ${sub.teacher_edited ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                ${sub.teacher_edited ? 'Đã xem xét' : 'Cần kiểm tra'}
+              </span>
+            </td>
+            <td class="p-4 text-center">
+              <button onclick="App.openReviewModal(${idx})" class="px-3 py-1.5 rounded-xl bg-blue-50 text-blue-700 hover:bg-blue-100 font-bold text-xs transition">
+                Xem & Sửa
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      },
+
+      // 7. XEM & SỬA BÀI CỦA HỌC SINH
+      openReviewModal(index) {
+        this.state.currentReviewIndex = index;
+        const sub = this.state.submissions[index];
+
+        this.state.reviewTempG1 = [...sub.edited_group1_words];
+        this.state.reviewTempG2 = [...sub.edited_group2_words];
+
+        document.getElementById('reviewStudentBanner').innerHTML = `
+          <div><strong>Học sinh:</strong> ${sub.student_name}</div>
+          <div><strong>Lớp:</strong> ${sub.student_class}</div>
+          <div><strong>Thời gian làm:</strong> ${sub.duration_seconds}s</div>
+          <div><strong>Từ gốc:</strong> ${sub.original_selected_words.join(', ') || 'Không có'}</div>
+        `;
+
+        document.getElementById('reviewGroup1Header').textContent = this.state.gameConfig.group1_name;
+        document.getElementById('reviewGroup2Header').textContent = this.state.gameConfig.group2_name;
+        document.getElementById('teacherFeedbackText').value = sub.teacher_note || "";
+
+        this.renderReviewGroups();
+        document.getElementById('modalReviewSubmission').classList.remove('hidden');
+      },
+
+      closeReviewModal() {
+        document.getElementById('modalReviewSubmission').classList.add('hidden');
+      },
+
+      renderReviewGroups() {
+        const renderZone = (words, containerId, targetOtherGroup) => {
+          const el = document.getElementById(containerId);
+          el.innerHTML = '';
+          words.forEach((w, i) => {
+            const card = document.createElement('span');
+            card.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 cursor-pointer hover:bg-amber-200 transition';
+            card.innerHTML = `${w} <span class="text-blue-600 font-extrabold" title="Chuyển sang nhóm kia">⇄</span> <span class="text-rose-500 font-black" title="Xóa từ">&times;</span>`;
+
+            // Chạm để chuyển nhóm
+            card.querySelector('span:first-of-type').onclick = (e) => {
+              e.stopPropagation();
+              words.splice(i, 1);
+              targetOtherGroup.push(w);
+              App.renderReviewGroups();
+            };
+
+            // Nút xóa
+            card.querySelector('span:last-of-type').onclick = (e) => {
+              e.stopPropagation();
+              words.splice(i, 1);
+              App.renderReviewGroups();
+            };
+
+            el.appendChild(card);
+          });
+        };
+
+        renderZone(this.state.reviewTempG1, 'reviewGroup1Cards', this.state.reviewTempG2);
+        renderZone(this.state.reviewTempG2, 'reviewGroup2Cards', this.state.reviewTempG1);
+      },
+
+      teacherAddWordToGroup(groupNum) {
+        const input = document.getElementById('teacherAddWordInput');
+        const w = input.value.trim().toLowerCase();
+        if (!w) return;
+        if (groupNum === 1) this.state.reviewTempG1.push(w);
+        else this.state.reviewTempG2.push(w);
+        input.value = '';
+        this.renderReviewGroups();
+      },
+
+      saveTeacherReview() {
+        const idx = this.state.currentReviewIndex;
+        if (idx === null) return;
+
+        const sub = this.state.submissions[idx];
+        sub.teacher_edited = true;
+        sub.edited_group1_words = [...this.state.reviewTempG1];
+        sub.edited_group2_words = [...this.state.reviewTempG2];
+        sub.teacher_note = document.getElementById('teacherFeedbackText').value.trim();
+        sub.reviewed_at = new Date().toLocaleString('vi-VN');
+
+        localStorage.setItem('nd_explorer_submissions', JSON.stringify(this.state.submissions));
+        this.closeReviewModal();
+        this.updateTeacherStats();
+        this.renderSubmissionsTable();
+        alert('Đã lưu bản sửa và lời nhận xét của giáo viên thành công!');
+      },
+
+      // 8. BIÊN SOẠN BÀI HỌC VÀ SAO LƯU DỮ LIỆU
+      openEditStoryModal() {
+        const cfg = this.state.gameConfig;
+        document.getElementById('editGameCodeInput').value = cfg.game_code;
+        document.getElementById('editReadingTitleInput').value = cfg.reading_title;
+        document.getElementById('editReadingContentInput').value = cfg.reading_content;
+        document.getElementById('editGroup1NameInput').value = cfg.group1_name;
+        document.getElementById('editGroup2NameInput').value = cfg.group2_name;
+        document.getElementById('editGroup1AnswersInput').value = cfg.default_answers.group1.join(', ');
+        document.getElementById('editGroup2AnswersInput').value = cfg.default_answers.group2.join(', ');
+
+        document.getElementById('modalEditStory').classList.remove('hidden');
+      },
+
+      closeEditStoryModal() {
+        document.getElementById('modalEditStory').classList.add('hidden');
+      },
+
+      saveStoryContent(isDraft) {
+        const cfg = {
+          game_code: document.getElementById('editGameCodeInput').value.trim().toUpperCase() || "TINHTU2026",
+          title: "Nhà Thám Hiểm Tính Từ",
+          reading_title: document.getElementById('editReadingTitleInput').value.trim(),
+          instruction: this.state.gameConfig.instruction,
+          reading_content: document.getElementById('editReadingContentInput').value.trim(),
+          group1_name: document.getElementById('editGroup1NameInput').value.trim(),
+          group2_name: document.getElementById('editGroup2NameInput').value.trim(),
+          default_answers: {
+            group1: document.getElementById('editGroup1AnswersInput').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean),
+            group2: document.getElementById('editGroup2AnswersInput').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean)
+          }
+        };
+
+        this.state.gameConfig = cfg;
+        localStorage.setItem('nd_explorer_game_config', JSON.stringify(cfg));
+        this.closeEditStoryModal();
+        this.updateTeacherStats();
+        alert(isDraft ? 'Đã lưu bản nháp thành công!' : 'Đã xác nhận và cập nhật nội dung bài học mới!');
+      },
+
+      exportDataBackup() {
+        const backup = {
+          game_config: this.state.gameConfig,
+          submissions: this.state.submissions,
+          exported_at: new Date().toISOString()
+        };
+
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backup, null, 2));
+        const dlAnchor = document.createElement('a');
+        dlAnchor.setAttribute("href", dataStr);
+        dlAnchor.setAttribute("download", `SaoLuu_NhaThamHiem_${this.state.gameConfig.game_code}_${Date.now()}.json`);
+        document.body.appendChild(dlAnchor);
+        dlAnchor.click();
+        dlAnchor.remove();
+      }
+    };
+
+    // Tự động khởi chạy khi tải trang
+    window.addEventListener('DOMContentLoaded', () => {
+      App.init();
+    });
   </script>
 </body>
 </html>
