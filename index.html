@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhà Thám Hiểm Tính Từ - Ngọc Dân Digital Classroom</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg-color: #f0f7ff;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --group1-color: #7e22ce;
+      --group1-bg: #faf5ff;
+      --group1-border: #d8b4fe;
+      --group2-color: #0369a1;
+      --group2-bg: #f0f9ff;
+      --group2-border: #bae6fd;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Tiêu đề & Linh vật */
+    .header-box {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .mascot {
+      font-size: 56px;
+      display: inline-block;
+      animation: float 2.5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 6px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      font-weight: 700;
+      color: #f59e0b;
+      letter-spacing: 1px;
+    }
+
+    /* Khối thẻ giao diện */
+    .card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 16px;
+    }
+
+    /* Màn hình Đăng nhập */
+    .form-group {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 2px solid #cbd5e1;
+      font-size: 15px;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 16px;
+      border: none;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      transform: translateY(-1px);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+    }
+
+    .btn-success:hover {
+      background: linear-gradient(135deg, #047857, #059669);
+      transform: translateY(-1px);
+    }
+
+    /* Màn hình chơi game */
+    .mission-badge {
+      background: #fef3c7;
+      border: 2px solid #fde68a;
+      border-radius: 16px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .mission-text {
+      font-size: 14px;
+      color: #92400e;
+      line-height: 1.5;
+    }
+
+    .student-tag {
+      background: #ffffff;
+      padding: 6px 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 13px;
+      color: #1e293b;
+      border: 1px solid #fde68a;
+    }
+
+    /* Bài văn đọc & chạm từ */
+    .story-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #1d4ed8;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .story-content {
+      line-height: 2;
+      font-size: 17px;
+      background: #f8fafc;
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      user-select: none;
+    }
+
+    .word-token {
+      display: inline-block;
+      padding: 2px 6px;
+      margin: 2px;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .word-token:hover {
+      border-color: #3b82f6;
+      background-color: #eff6ff;
+      transform: translateY(-2px);
+    }
+
+    .word-token.selected {
+      background: #fde047;
+      border-color: #ea580c;
+      color: #78350f;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.25);
+      transform: scale(1.05);
+    }
+
+    /* Khu vực phân loại */
+    .dock-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-pool {
+      min-height: 80px;
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .empty-hint {
+      color: #94a3b8;
+      font-size: 13px;
+      font-style: italic;
+      margin: auto;
+    }
+
+    .classification-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 640px) {
+      .classification-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .group-box {
+      border-radius: 18px;
+      padding: 16px;
+      border: 2px solid;
+    }
+
+    .group-box.g1 {
+      background: var(--group1-bg);
+      border-color: var(--group1-border);
+    }
+
+    .group-box.g2 {
+      background: var(--group2-bg);
+      border-color: var(--group2-border);
+    }
+
+    .group-header {
+      font-size: 14px;
+      font-weight: 900;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .g1 .group-header { color: var(--group1-color); }
+    .g2 .group-header { color: var(--group2-color); }
+
+    .group-target {
+      min-height: 130px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-content: flex-start;
+      border: 1px dashed rgba(0,0,0,0.1);
+    }
+
+    /* Thẻ từ hiển thị (Chip) */
+    .word-chip {
+      background: #ffffff;
+      border: 2px solid #facc15;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+
+    .chip-btn {
+      border: none;
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .btn-to-g1 { background: #f3e8ff; color: #7e22ce; }
+    .btn-to-g2 { background: #e0f2fe; color: #0284c7; }
+    .btn-swap { background: #fef08a; color: #854d0e; }
+    .btn-back { background: #f1f5f9; color: #475569; }
+    .btn-del {
+      background: #fee2e2;
+      color: #b91c1c;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      font-size: 13px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Màn hình chúc mừng */
+    .success-box {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .success-icon {
+      font-size: 72px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <div class="header-box">
+      <div class="mascot">🦁🧭</div>
+      <h1 class="title">Nhà Thám Hiểm Tính Từ</h1>
+      <div class="subtitle">NGỌC DÂN DIGITAL CLASSROOM</div>
+    </div>
+
+    <!-- 1. MÀN HÌNH BẮT ĐẦU -->
+    <div id="viewStart" class="card" style="max-width: 480px; margin: 0 auto;">
+      <h3 style="text-align: center; margin-bottom: 16px; font-weight: 800; font-size: 18px;">THAM GIA THỬ THÁCH</h3>
+      
+      <div class="form-group">
+        <label>Họ và tên của em:</label>
+        <input type="text" id="studentName" class="form-control" placeholder="Ví dụ: Nguyễn Văn An">
+      </div>
+
+      <div class="form-group">
+        <label>Lớp của em:</label>
+        <select id="studentClass" class="form-control">
+          <option value="Lớp 4A">Lớp 4A</option>
+          <option value="Lớp 4B">Lớp 4B</option>
+          <option value="Lớp 4C">Lớp 4C</option>
+          <option value="Lớp 4D">Lớp 4D</option>
+          <option value="Lớp 5A">Lớp 5A</option>
+          <option value="Lớp Khác">Lớp Khác</option>
+        </select>
+      </div>
+
+      <button id="btnStartGame" class="btn btn-primary" style="margin-top: 10px;">
+        BẮT ĐẦU KHÁM PHÁ 🚀
+      </button>
+    </div>
+
+    <!-- 2. MÀN HÌNH CHƠI BÀI TẬP -->
+    <div id="viewGame" class="hidden">
+      <!-- Bảng nhiệm vụ -->
+      <div class="mission-badge">
+        <div class="mission-text">
+          <strong>📜 Nhiệm vụ:</strong> Em hãy chạm vào các <em>tính từ</em> trong đoạn văn. Sau đó ấn nút để đưa thẻ vào đúng 2 nhóm bên dưới nhé!
+        </div>
+        <div id="displayBadge" class="student-tag">Học sinh: ---</div>
+      </div>
+
+      <!-- Bài đọc -->
+      <div class="card">
+        <div class="story-title">📖 BÉT-TÔ-VEN VÀ BẢN XÔ-NÁT ÁNH TRĂNG</div>
+        <div id="storyContainer" class="story-content"></div>
+      </div>
+
+      <!-- Khay thẻ từ đã tìm được -->
+      <div class="card">
+        <div class="dock-title">
+          <span>🏷️ THẺ TỪ VỪA CHỌN:</span>
+          <span id="badgeCount" style="font-size: 12px; background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 12px;">0 thẻ</span>
+        </div>
+        <div id="dockPool" class="card-pool">
+          <div id="emptyHint" class="empty-hint">(Chưa có từ nào. Em hãy chạm vào các từ miêu tả trong bài văn phía trên nhé!)</div>
+        </div>
+      </div>
+
+      <!-- 2 Khu vực phân loại -->
+      <div class="classification-grid">
+        <div class="group-box g1">
+          <div class="group-header">🎵 ĐẶC ĐIỂM TIẾNG NHẠC</div>
+          <div id="zoneG1" class="group-target"></div>
+        </div>
+        <div class="group-box g2">
+          <div class="group-header">🌊 ĐẶC ĐIỂM DÒNG SÔNG</div>
+          <div id="zoneG2" class="group-target"></div>
+        </div>
+      </div>
+
+      <!-- Nút nộp bài -->
+      <button id="btnSubmitGame" class="btn btn-success" style="max-width: 320px; margin: 0 auto; display: block;">
+        HOÀN THÀNH – NỘP BÀI ✨
+      </button>
+    </div>
+
+    <!-- 3. MÀN HÌNH HOÀN THÀNH -->
+    <div id="viewSuccess" class="card hidden success-box">
+      <div class="success-icon">🏆🎉</div>
+      <h2 style="color: #059669; font-size: 22px; font-weight: 900; margin-bottom: 8px;">XUẤT SẮC LẮM!</h2>
+      <p style="color: #64748b; font-size: 15px; margin-bottom: 24px;">Bài làm của em đã hoàn thành và được lưu lại trên thiết bị thành công.</p>
+      <button id="btnPlayAgain" class="btn btn-primary" style="max-width: 260px; margin: 0 auto;">
+        LÀM LẠI BÀI MỚI 🔄
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    (function() {
+      // Dữ liệu câu chuyện
+      var storyText = "Bét-tô-ven là nhà soạn nhạc cổ điển vĩ đại trên thế giới. Ông đã sáng tác nhiều bản nhạc nổi tiếng, trong số đó có Bản xô-nát Ánh trăng. Tương truyền, vào một đêm trăng sáng, Bét-tô ven đến cây cầu bắc qua dòng sông Đa-nuýp xinh đẹp trong thành Viên. Đứng trên cầu, ông say sưa ngắm dòng sông lấp lánh ánh trăng trong một không gian tĩnh lặng. Bỗng Bét-tô-ven nghe thấy tiếng dương cầm văng vẳng ở phía xa. Những nốt nhạc ngẫu hứng vang lên, lúc êm ái, nhẹ nhàng như ánh trăng, lúc lại mạnh mẽ như sóng sông Đa-nuýp. Tiếng dương cầm da diết của người thiếu nữ mù làm ông vô cùng xúc động. Bản xô-nát Ánh trăng ra đời từ đó.";
+
+      // Danh mục nhận diện từ ghép liền khối
+      var compounds = [
+        "bản xô-nát ánh trăng", "bét-tô-ven", "đa-nuýp", "cổ điển", "vĩ đại",
+        "nổi tiếng", "xinh đẹp", "lấp lánh", "tĩnh lặng", "văng vẳng",
+        "ngẫu hứng", "êm ái", "nhẹ nhàng", "mạnh mẽ", "da diết", "xúc động", "say sưa"
+      ];
+
+      var selectedWords = [];
+      var group1Words = [];
+      var group2Words = [];
+
+      // Âm thanh đơn giản không cần tải tệp
+      function playBeep(freq, duration) {
+        try {
+          var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          var osc = audioCtx.createOscillator();
+          var gain = audioCtx.createGain();
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+          osc.start();
+          osc.stop(audioCtx.currentTime + duration);
+        } catch(e) {}
+      }
+
+      // Khởi tạo bài văn
+      function initStory() {
+        var container = document.getElementById("storyContainer");
+        container.innerHTML = "";
+        var words = storyText.split(" ");
+        var i = 0;
+
+        while (i < words.length) {
+          var matched = false;
+          // Thử ghép cụm 3 từ, 2 từ
+          for (var len = 3; len >= 2; len--) {
+            if (i + len <= words.length) {
+              var phrase = words.slice(i, i + len).join(" ");
+              var cleanPhrase = phrase.replace(/[.,;:"“”!?()]/g, "").toLowerCase();
+              if (compounds.indexOf(cleanPhrase) !== -1) {
+                createWordSpan(container, phrase, cleanPhrase);
+                i += len;
+                matched = true;
+                break;
+              }
+            }
+          }
+          if (!matched) {
+            var single = words[i];
+            var cleanSingle = single.replace(/[.,;:"“”!?()]/g, "").toLowerCase();
+            createWordSpan(container, single, cleanSingle);
+            i++;
+          }
+        }
+      }
+
+      function createWordSpan(container, raw, clean) {
+        var span = document.createElement("span");
+        span.className = "word-token";
+        span.textContent = raw;
+        span.setAttribute("data-word", clean);
+        span.addEventListener("click", function() {
+          toggleWord(clean);
+        });
+        container.appendChild(span);
+        container.appendChild(document.createTextNode(" "));
+      }
+
+      function toggleWord(word) {
+        playBeep(520, 0.08);
+        var idx = selectedWords.indexOf(word);
+        if (idx !== -1) {
+          selectedWords.splice(idx, 1);
+          removeFromGroup(group1Words, word);
+          removeFromGroup(group2Words, word);
+        } else {
+          selectedWords.push(word);
+        }
+        renderState();
+      }
+
+      function removeFromGroup(arr, item) {
+        var pos = arr.indexOf(item);
+        if (pos !== -1) arr.splice(pos, 1);
+      }
+
+      function renderState() {
+        // Cập nhật highlight chữ trong bài
+        var tokens = document.querySelectorAll(".word-token");
+        for (var i = 0; i < tokens.length; i++) {
+          var w = tokens[i].getAttribute("data-word");
+          if (selectedWords.indexOf(w) !== -1) {
+            tokens[i].classList.add("selected");
+          } else {
+            tokens[i].classList.remove("selected");
+          }
+        }
+
+        // Cập nhật số lượng
+        document.getElementById("badgeCount").textContent = selectedWords.length + " thẻ";
+        document.getElementById("emptyHint").style.display = selectedWords.length === 0 ? "block" : "none";
+
+        // Render các nhóm thẻ
+        var pool = document.getElementById("dockPool");
+        var g1 = document.getElementById("zoneG1");
+        var g2 = document.getElementById("zoneG2");
+
+        // Xóa các thẻ cũ
+        var chips = document.querySelectorAll(".word-chip");
+        for (var c = 0; c < chips.length; c++) chips[c].remove();
+
+        selectedWords.forEach(function(word) {
+          var chip = document.createElement("div");
+          chip.className = "word-chip";
+          chip.innerHTML = "<span>" + word + "</span>";
+
+          if (group1Words.indexOf(word) !== -1) {
+            // Đang ở nhóm 1
+            var btnSwap = document.createElement("button");
+            btnSwap.className = "chip-btn btn-swap";
+            btnSwap.title = "Đổi sang Nhóm 2";
+            btnSwap.textContent = "⇄ N2";
+            btnSwap.onclick = function() {
+              removeFromGroup(group1Words, word);
+              group2Words.push(word);
+              playBeep(440, 0.08);
+              renderState();
+            };
+            chip.appendChild(btnSwap);
+
+            var btnBack = document.createElement("button");
+            btnBack.className = "chip-btn btn-back";
+            btnBack.title = "Đưa về khay";
+            btnBack.textContent = "↩";
+            btnBack.onclick = function() {
+              removeFromGroup(group1Words, word);
+              renderState();
+            };
+            chip.appendChild(btnBack);
+
+            g1.appendChild(chip);
+          } else if (group2Words.indexOf(word) !== -1) {
+            // Đang ở nhóm 2
+            var btnSwap = document.createElement("button");
+            btnSwap.className = "chip-btn btn-swap";
+            btnSwap.title = "Đổi sang Nhóm 1";
+            btnSwap.textContent = "⇄ N1";
+            btnSwap.onclick = function() {
+              removeFromGroup(group2Words, word);
+              group1Words.push(word);
+              playBeep(440, 0.08);
+              renderState();
+            };
+            chip.appendChild(btnSwap);
+
+            var btnBack = document.createElement("button");
+            btnBack.className = "chip-btn btn-back";
+            btnBack.title = "Đưa về khay";
+            btnBack.textContent = "↩";
+            btnBack.onclick = function() {
+              removeFromGroup(group2Words, word);
+              renderState();
+            };
+            chip.appendChild(btnBack);
+
+            g2.appendChild(chip);
+          } else {
+            // Ở khay chờ
+            var btnTo1 = document.createElement("button");
+            btnTo1.className = "chip-btn btn-to-g1";
+            btnTo1.textContent = "🎵 N1";
+            btnTo1.onclick = function() {
+              group1Words.push(word);
+              playBeep(380, 0.08);
+              renderState();
+            };
+            chip.appendChild(btnTo1);
+
+            var btnTo2 = document.createElement("button");
+            btnTo2.className = "chip-btn btn-to-g2";
+            btnTo2.textContent = "🌊 N2";
+            btnTo2.onclick = function() {
+              group2Words.push(word);
+              playBeep(380, 0.08);
+              renderState();
+            };
+            chip.appendChild(btnTo2);
+
+            pool.appendChild(chip);
+          }
+
+          // Nút xóa thẻ
+          var btnDel = document.createElement("button");
+          btnDel.className = "btn-del";
+          btnDel.innerHTML = "&times;";
+          btnDel.onclick = function() {
+            toggleWord(word);
+          };
+          chip.appendChild(btnDel);
+        });
+      }
+
+      // Xử lý sự kiện nút bấm
+      document.getElementById("btnStartGame").addEventListener("click", function() {
+        var name = document.getElementById("studentName").value.trim();
+        var cls = document.getElementById("studentClass").value;
+        if (!name) {
+          alert("Em hãy nhập họ và tên trước khi bắt đầu nhé!");
+          return;
+        }
+        document.getElementById("displayBadge").textContent = name + " (" + cls + ")";
+        document.getElementById("viewStart").classList.add("hidden");
+        document.getElementById("viewGame").classList.remove("hidden");
+        initStory();
+        renderState();
+      });
+
+      document.getElementById("btnSubmitGame").addEventListener("click", function() {
+        if (selectedWords.length === 0) {
+          alert("Em chưa chọn được tính từ nào. Hãy chạm vào các từ miêu tả trong bài văn nhé!");
+          return;
+        }
+        playBeep(650, 0.2);
+        document.getElementById("viewGame").classList.add("hidden");
+        document.getElementById("viewSuccess").classList.remove("hidden");
+      });
+
+      document.getElementById("btnPlayAgain").addEventListener("click", function() {
+        selectedWords = [];
+        group1Words = [];
+        group2Words = [];
+        document.getElementById("studentName").value = "";
+        document.getElementById("viewSuccess").classList.add("hidden");
+        document.getElementById("viewStart").classList.remove("hidden");
+      });
+
+    })();
+  </script>
+</body>
+</html>
